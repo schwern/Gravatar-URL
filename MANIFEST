@@ -1,0 +1,7 @@
+Build.PL
+Changes
+lib/Gravatar/URL.pm
+MANIFEST
+t/error.t
+t/id.t
+t/url.t
