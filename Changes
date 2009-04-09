@@ -1,3 +1,9 @@
+1.01
+    Protocol Updates
+    * Gravatar expanded the max size to 512.
+      [rt.cpan.org 41244] (CHISEL)
+
+
 1.00  Sun Apr 27 14:12:24 PDT 2008
     Bug Fixes
     * Gravatar IDs are insensitive to the case of the email address.

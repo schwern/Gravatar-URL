@@ -1,5 +1,7 @@
 #!/usr/bin/perl -w
 
+# Test argument error handling.
+
 use strict;
 
 use Test::More 'no_plan';
@@ -20,11 +22,14 @@ my @tests = (
     ],
 
     [ { email => 'foo@bar.com', size => 0 },
-      "Gravatar size must be 1 .. 80"
+      "Gravatar size must be 1 .. 512"
     ],
 
-    [ { email => 'foo@bar.com', size => 90 },
-      "Gravatar size must be 1 .. 80"
+    [ { email => 'foo@bar.com', size => 1 } ],
+    [ { email => 'foo@bar.com', size => 512 } ],
+
+    [ { email => 'foo@bar.com', size => 513 },
+      "Gravatar size must be 1 .. 512"
     ],
     
     [ { email => 'foo@bar.com', border => '00G' },
@@ -37,8 +42,14 @@ my @tests = (
 );
 
 for my $test (@tests) {
-    my($args, $error) = @$test;
+    my($args, $want) = @$test;
     
     eval { gravatar_url( %$args ) };
-    is $@, sprintf "%s at %s line %d\n", $error, $0, __LINE__ - 1;
+
+    my $error = $@;
+    $want  = !$want ? ""
+                    : sprintf "%s at %s line %d\n", $want, $0, __LINE__ - 4;
+
+    my $name = join ", ", map { "$_ => '$args->{$_}'" } keys %$args;
+    is $error, $want, "gravatar_url($name)";
 }

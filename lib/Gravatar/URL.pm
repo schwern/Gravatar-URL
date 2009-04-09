@@ -64,7 +64,7 @@ A user can rate how offensive the content of their gravatar is, like a movie.  T
 
 Specifies the desired width and height of the gravatar (gravatars are square).
 
-Valid values are from 1 to 80 inclusive. Any size other than 80 will cause the original gravatar image to be downsampled using bicubic resampling before output.
+Valid values are from 1 to 512 inclusive. Any size other than 80 may cause the original gravatar image to be downsampled using bicubic resampling before output.
 
     size    => 40,  # 40 x 40 image
 
@@ -102,8 +102,8 @@ sub gravatar_url {
     my $base = $args{base} || $Gravatar_Base;
 
     if ( exists $args{size} ) {
-        $args{size} >= 1 and $args{size} <= 80
-            or croak "Gravatar size must be 1 .. 80";
+        $args{size} >= 1 and $args{size} <= 512
+            or croak "Gravatar size must be 1 .. 512";
     }
 
     if ( exists $args{rating} ) {
