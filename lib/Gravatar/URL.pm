@@ -36,7 +36,15 @@ Gravatar::URL - Make URLs for Gravatars from an email address
 
 =head1 DESCRIPTION
 
-A Gravatar is a Globally Recognized Avatar for a given email address.  This allows you to have a global picture associated with your email address.  You can look up the Gravatar for any email address by constructing a URL to get the image from L<gravatar.com>.  This module does that.
+A Gravatar is a Globally Recognized Avatar for a given email address.
+This allows you to have a global picture associated with your email
+address.  You can look up the Gravatar for any email address by
+constructing a URL to get the image from L<gravatar.com>.  This module
+does that.
+
+Examples of use include the author faces on L<http://search.cpan.org>.
+
+See L<http://gravatar.com> for more info.
 
 =head1 Functions
 
@@ -66,7 +74,9 @@ the highest rating that will be given.
 
 Specifies the desired width and height of the gravatar (gravatars are square).
 
-Valid values are from 1 to 512 inclusive. Any size other than 80 may cause the original gravatar image to be downsampled using bicubic resampling before output.
+Valid values are from 1 to 512 inclusive. Any size other than 80 may
+cause the original gravatar image to be downsampled using bicubic
+resampling before output.
 
     size    => 40,  # 40 x 40 image
 
@@ -78,16 +88,26 @@ The url to use if the user has no gravatar or has none that fits your rating req
 
 Relative URLs will be relative to the base (ie. gravatar.com), not your web site.
 
+Gravatar defines special values that you may use as a default to
+produce dynamic default images. These are "identicon", "monsterid" and
+"wavatar".  See L<http://en.gravatar.com/site/implement/url> for more
+info.
+
+If omitted, Gravatar will serve up their default image, the blue G.
+
 =head4 border
 
-Gravatars can be requested to have a 1 pixel colored border.  If you'd like that, pass in the color to border as a 3 or 6 digit hex string.
+Gravatars can be requested to have a 1 pixel colored border.  If you'd
+like that, pass in the color to border as a 3 or 6 digit hex string.
 
     border => "000000",  # a black border, like my soul
     border => "000",     # black, but in 3 digits
 
 =head4 base
 
-This is the URL of the location of the Gravatar server you wish to grab Gravatars from.  Defaults to L<http://www.gravatar.com/avatar.php">.
+This is the URL of the location of the Gravatar server you wish to
+grab Gravatars from.  Defaults to
+L<http://www.gravatar.com/avatar/">.
 
 
 =cut
@@ -157,12 +177,14 @@ sub gravatar_id {
 
 =head1 THANKS
 
-Thanks to L<gravatar.com> for coming up with the whole idea and Ashley Pond V from whose L<Template::Plugin::Gravatar> I took most of the code.
+Thanks to L<gravatar.com> for coming up with the whole idea and Ashley
+Pond V from whose L<Template::Plugin::Gravatar> I took most of the
+original code.
 
 
 =head1 LICENSE
 
-Copyright 2007 - 2008, Michael G Schwern <schwern@pobox.com>.
+Copyright 2007 - 2009, Michael G Schwern <schwern@pobox.com>.
 
 This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
@@ -176,7 +198,7 @@ L<Template::Plugin::Gravatar> - a Gravatar plugin for Template Toolkit
 
 L<http://www.gravatar.com> - The Gravatar web site
 
-L<http://site.gravatar.com/site/implement> - The Gravatar URL implementor's guide
+L<http://en.gravatar.com/site/implement/url> - The Gravatar URL implementor's guide
 
 =cut
 
