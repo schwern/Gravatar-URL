@@ -7,17 +7,13 @@ use URI::Escape qw(uri_escape);
 use Digest::MD5 qw(md5_hex);
 use Carp;
 
-use Exporter;
-BEGIN {
-    our @ISA    = qw(Exporter);
+our $VERSION = '1.00';
 
-    our @EXPORT = qw(gravatar_id
-                     gravatar_url
-                    );
-    
-    our $VERSION = '1.00';
-}
-
+use base 'Exporter';
+our @EXPORT = qw(
+    gravatar_id
+    gravatar_url
+);    
 
 my $Gravatar_Base = "http://www.gravatar.com/avatar/";
 
