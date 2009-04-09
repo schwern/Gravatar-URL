@@ -78,8 +78,8 @@ The url to use if the user has no gravatar or has none that fits your rating req
 
 Gravatars can be requested to have a 1 pixel colored border.  If you'd like that, pass in the color to border as a 3 or 6 digit hex string.
 
-    border => "FFFFFF",  # a black border, like my soul
-    border => "FFF",     # black, but in 3 digits
+    border => "000000",  # a black border, like my soul
+    border => "000",     # black, but in 3 digits
 
 =head4 base
 
