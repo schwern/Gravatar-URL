@@ -34,7 +34,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
            rating  => 'X',
            email   => $email,
          },
-         "$base?gravatar_id=$id&rating=X&default=%2Flocal.png",
+         "$base?gravatar_id=$id&rating=x&default=%2Flocal.png",
         ],
         
         [{ default  => "/local.png",
@@ -42,7 +42,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
            rating   => 'R',
            size     => 80
          },
-         "$base?gravatar_id=$id&rating=R&size=80&default=%2Flocal.png"
+         "$base?gravatar_id=$id&rating=r&size=80&default=%2Flocal.png"
         ],
         [{ default => "/local.png",
            border  => 'AAB',
@@ -50,7 +50,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
            size    => 45,
            email   => $email,
          },
-         "$base?gravatar_id=$id&rating=PG&size=45&default=%2Flocal.png&border=AAB"
+         "$base?gravatar_id=$id&rating=pg&size=45&default=%2Flocal.png&border=AAB"
         ],
     );
 

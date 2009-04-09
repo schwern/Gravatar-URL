@@ -56,9 +56,11 @@ C<%options> are optional and are...
 
 =head4 rating
 
-A user can rate how offensive the content of their gravatar is, like a movie.  The ratings are G, PG, R and X.  If you specify a rating it is the highest rating that will be given.
+A user can rate how offensive the content of their gravatar is, like a
+movie.  The ratings are g, pg, r and x.  If you specify a rating it is
+the highest rating that will be given.
 
-    rating => "R"   # includes G, PG and R
+    rating => "r"   # includes g, pg and r
 
 =head4 size
 
@@ -107,8 +109,9 @@ sub gravatar_url {
     }
 
     if ( exists $args{rating} ) {
-        $args{rating} =~ /\A(?:G|PG|R|X)\Z/
-            or croak "Gravatar rating can only be G, PG, R, or X";
+        $args{rating} =~ /\A(?:g|pg|r|x)\Z/i
+            or croak "Gravatar rating can only be g, pg, r, or x";
+        $args{rating} = lc $args{rating};
     }
 
     if ( exists $args{border} ) {

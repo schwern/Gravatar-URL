@@ -18,7 +18,7 @@ my @tests = (
     ],
 
     [ { email => 'foo@bar.com', rating => 'Q' },
-      "Gravatar rating can only be G, PG, R, or X"
+      "Gravatar rating can only be g, pg, r, or x"
     ],
 
     [ { email => 'foo@bar.com', size => 0 },

@@ -3,6 +3,8 @@
     * Gravatar expanded the max size to 512.
       [rt.cpan.org 41244] (CHISEL)
     * Base URL changed to http://www.gravatar.com/avatar/
+    * Ratings are now lower cased.  Upper cased ratings still
+      accepted, but will be lower cased.
 
 
 1.00  Sun Apr 27 14:12:24 PDT 2008
