@@ -150,8 +150,10 @@ sub gravatar_url {
         push @pairs, join("=", $key, $args{$key});
     }
 
-    my $uri = "$base/$args{gravatar_id}";
-    $uri .= "?".join("&",@pairs) if @pairs;
+    my $uri = $base;
+    $uri   .= "/" unless $uri =~ m{/$};
+    $uri   .= $args{gravatar_id};
+    $uri   .= "?".join("&",@pairs) if @pairs;
 
     return $uri;
 }

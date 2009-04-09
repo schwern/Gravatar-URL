@@ -7,7 +7,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
 {
     my $id = 'a60fc0828e808b9a6a9d50f1792240c8';
     my $email = 'whatever@wherever.whichever';
-    my $base = 'http://www.gravatar.com/avatar/';
+    my $base = 'http://www.gravatar.com/avatar';
 
     my @tests = (
         [{ email => $email },
@@ -20,6 +20,13 @@ BEGIN { use_ok 'Gravatar::URL'; }
         
         [{ email => $email,
            base  => 'http://example.com/gravatar'
+         },
+         "http://example.com/gravatar/$id",
+        ],
+
+        # Make sure we don't get a double slash after the base.
+        [{ email => $email,
+           base  => 'http://example.com/gravatar/'
          },
          "http://example.com/gravatar/$id",
         ],
