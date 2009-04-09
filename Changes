@@ -7,6 +7,8 @@
     * Ratings are now lower cased.  Upper cased ratings still
       accepted, but will be lower cased.
     * Using new http://base/id?key=value style.
+    * The border key has been removed from the protocol,
+      so its use throws a deprecation warning.
 
     New Features
     * The short_keys flag uses short keys in the URL

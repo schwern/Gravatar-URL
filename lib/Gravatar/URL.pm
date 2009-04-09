@@ -97,6 +97,9 @@ If omitted, Gravatar will serve up their default image, the blue G.
 
 =head4 border
 
+B<DEPRECATED!> This key has been removed from the Gravatar protocol.
+It will be removed from future versions of Gravatar::URL.
+
 Gravatars can be requested to have a 1 pixel colored border.  If you'd
 like that, pass in the color to border as a 3 or 6 digit hex string.
 
@@ -141,6 +144,7 @@ sub gravatar_url {
     }
 
     if ( exists $args{border} ) {
+        carp "The border key is deprecated";
         $args{border} =~ /\A[0-9A-F]{3}(?:[0-9A-F]{3})?\Z/
             or croak "Border must be a 3 or 6 digit hex number in caps";
     }

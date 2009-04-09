@@ -2,7 +2,8 @@ Build.PL
 Changes
 lib/Gravatar/URL.pm
 MANIFEST
+META.yml
+t/deprecated.t
 t/error.t
 t/id.t
 t/url.t
-META.yml

@@ -53,31 +53,28 @@ BEGIN { use_ok 'Gravatar::URL'; }
         ],
 
         [{ default => "/local.png",
-           border  => 'AAB',
            rating  => 'PG',
            size    => 45,
            email   => $email,
          },
-         "$base/$id?rating=pg&size=45&default=%2Flocal.png&border=AAB"
+         "$base/$id?rating=pg&size=45&default=%2Flocal.png"
         ],
 
         [{ default => "/local.png",
-           border  => 'AAB',
            rating  => 'PG',
            size    => 45,
            email   => $email,
          },
-         "$base/$id?rating=pg&size=45&default=%2Flocal.png&border=AAB"
+         "$base/$id?rating=pg&size=45&default=%2Flocal.png"
         ],
 
         [{ default => "/local.png",
-           border  => 'AAB',
            rating  => 'PG',
            size    => 45,
            email   => $email,
            short_keys => 1,
          },
-         "$base/$id?r=pg&s=45&d=%2Flocal.png&b=AAB"
+         "$base/$id?r=pg&s=45&d=%2Flocal.png"
         ],
     );
 

@@ -31,14 +31,6 @@ my @tests = (
     [ { email => 'foo@bar.com', size => 513 },
       "Gravatar size must be 1 .. 512"
     ],
-    
-    [ { email => 'foo@bar.com', border => '00G' },
-      "Border must be a 3 or 6 digit hex number in caps",
-    ],
-
-    [ { email => 'foo@bar.com', border => '0' },
-      "Border must be a 3 or 6 digit hex number in caps",
-    ],
 );
 
 for my $test (@tests) {
