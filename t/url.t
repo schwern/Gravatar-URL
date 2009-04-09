@@ -69,6 +69,16 @@ BEGIN { use_ok 'Gravatar::URL'; }
          },
          "$base/$id?rating=pg&size=45&default=%2Flocal.png&border=AAB"
         ],
+
+        [{ default => "/local.png",
+           border  => 'AAB',
+           rating  => 'PG',
+           size    => 45,
+           email   => $email,
+           short_keys => 1,
+         },
+         "$base/$id?r=pg&s=45&d=%2Flocal.png&b=AAB"
+        ],
     );
 
     # Add tests for the special defaults.

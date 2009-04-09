@@ -8,6 +8,10 @@
       accepted, but will be lower cased.
     * Using new http://base/id?key=value style.
 
+    New Features
+    * The short_keys flag uses short keys in the URL
+      ("s" instead of "size", for example).
+
 
 1.00  Sun Apr 27 14:12:24 PDT 2008
     Bug Fixes

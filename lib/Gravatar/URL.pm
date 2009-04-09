@@ -109,6 +109,12 @@ This is the URL of the location of the Gravatar server you wish to
 grab Gravatars from.  Defaults to
 L<http://www.gravatar.com/avatar/">.
 
+=head4 short_keys
+
+If true, use short key names when constructing the URL.  "s" instead
+of "size", "r" instead of "ratings" and so on.
+
+short_keys defaults to false, but may default to true in the future.
 
 =cut
 
@@ -145,9 +151,12 @@ sub gravatar_url {
         if $args{default};
 
     my @pairs;
-    for my $key ( qw( rating size default border ) ) {
-        next unless exists $args{$key};
-        push @pairs, join("=", $key, $args{$key});
+    for my $arg ( qw( rating size default border ) ) {
+        next unless exists $args{$arg};
+
+        my $key = $arg;
+        $key = substr($key, 0, 1) if $args{short_keys};
+        push @pairs, join("=", $key, $args{$arg});
     }
 
     my $uri = $base;
