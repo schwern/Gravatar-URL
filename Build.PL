@@ -14,7 +14,7 @@ my $builder = Module::Build->new(
             bugtracker =>
               'http://rt.cpan.org/Public/Dist/Display.html?Name=Gravatar-URL',
             repository =>
-              'http://svn.schwern.org/svn/CPAN/Gravatar-URL',
+              'http://github.com/schwern/gravatar-url/tree/master',
         },
 
         keywords => [ 'Gravatar' ],
