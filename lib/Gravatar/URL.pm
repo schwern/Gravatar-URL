@@ -80,7 +80,7 @@ resampling before output.
 
 The url to use if the user has no gravatar or has none that fits your rating requirements.
 
-    default => "http://upload.wikimedia.org/wikipedia/en/8/89/Alfred.jpg"
+    default => "https://secure.wikimedia.org/wikipedia/en/wiki/File:Mad30.jpg"
 
 Relative URLs will be relative to the base (ie. gravatar.com), not your web site.
 
