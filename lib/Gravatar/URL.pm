@@ -145,17 +145,13 @@ sub gravatar_url {
         if $args{default};
 
     my @pairs;
-    for my $key ( qw( gravatar_id rating size default border ) ) {
+    for my $key ( qw( rating size default border ) ) {
         next unless exists $args{$key};
         push @pairs, join("=", $key, $args{$key});
     }
 
-    my $uri = join("?",
-                   $base,
-                   join("&",
-                        @pairs
-                        )
-                   );
+    my $uri = "$base/$args{gravatar_id}";
+    $uri .= "?".join("&",@pairs) if @pairs;
 
     return $uri;
 }

@@ -11,30 +11,30 @@ BEGIN { use_ok 'Gravatar::URL'; }
 
     my @tests = (
         [{ email => $email },
-         "$base?gravatar_id=$id",
+         "$base/$id",
         ],
         
         [{ id => $id },
-         "$base?gravatar_id=$id",
+         "$base/$id",
         ],
         
         [{ email => $email,
            base  => 'http://example.com/gravatar'
          },
-         "http://example.com/gravatar?gravatar_id=$id",
+         "http://example.com/gravatar/$id",
         ],
         
         [{ default => "/local.png",
            email   => $email
          },
-         "$base?gravatar_id=$id&default=%2Flocal.png",
+         "$base/$id?default=%2Flocal.png",
         ],
         
         [{ default => "/local.png",
            rating  => 'X',
            email   => $email,
          },
-         "$base?gravatar_id=$id&rating=x&default=%2Flocal.png",
+         "$base/$id?rating=x&default=%2Flocal.png",
         ],
         
         [{ default  => "/local.png",
@@ -42,7 +42,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
            rating   => 'R',
            size     => 80
          },
-         "$base?gravatar_id=$id&rating=r&size=80&default=%2Flocal.png"
+         "$base/$id?rating=r&size=80&default=%2Flocal.png"
         ],
 
         [{ default => "/local.png",
@@ -51,7 +51,16 @@ BEGIN { use_ok 'Gravatar::URL'; }
            size    => 45,
            email   => $email,
          },
-         "$base?gravatar_id=$id&rating=pg&size=45&default=%2Flocal.png&border=AAB"
+         "$base/$id?rating=pg&size=45&default=%2Flocal.png&border=AAB"
+        ],
+
+        [{ default => "/local.png",
+           border  => 'AAB',
+           rating  => 'PG',
+           size    => 45,
+           email   => $email,
+         },
+         "$base/$id?rating=pg&size=45&default=%2Flocal.png&border=AAB"
         ],
     );
 
@@ -60,7 +69,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
         my $test = [{ default => $special,
                       email   => $email,
                     },
-                    "$base?gravatar_id=$id&default=$special",
+                    "$base/$id?default=$special",
                    ];
         push @tests, $test;
     }
