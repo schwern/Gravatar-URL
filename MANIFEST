@@ -5,3 +5,4 @@ MANIFEST
 t/error.t
 t/id.t
 t/url.t
+META.yml

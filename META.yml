@@ -1,0 +1,25 @@
+---
+name: Gravatar-URL
+version: 0.01
+author: []
+abstract: Make URLs for Gravatars from an email address
+license: perl
+resources:
+  bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Gravatar-URL
+  license: http://dev.perl.org/licenses/
+  repository: http://svn.schwern.org/svn/CPAN/Gravatar-URL
+requires:
+  Carp: 0
+  Digest::MD5: 0
+  Test::More: 0.4
+  URI::Escape: 0
+provides:
+  Gravatar::URL:
+    file: lib/Gravatar/URL.pm
+    version: 0.01
+generated_by: Module::Build version 0.2808
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
+keywords:
+  - Gravatar
