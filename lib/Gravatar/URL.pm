@@ -19,7 +19,7 @@ BEGIN {
 }
 
 
-my $Gravatar_Base = "http://www.gravatar.com/avatar.php";
+my $Gravatar_Base = "http://www.gravatar.com/avatar/";
 
 
 =head1 NAME

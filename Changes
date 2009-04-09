@@ -2,6 +2,7 @@
     Protocol Updates
     * Gravatar expanded the max size to 512.
       [rt.cpan.org 41244] (CHISEL)
+    * Base URL changed to http://www.gravatar.com/avatar/
 
 
 1.00  Sun Apr 27 14:12:24 PDT 2008

@@ -7,7 +7,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
 {
     my $id = 'a60fc0828e808b9a6a9d50f1792240c8';
     my $email = 'whatever@wherever.whichever';
-    my $base = 'http://www.gravatar.com/avatar.php';
+    my $base = 'http://www.gravatar.com/avatar/';
 
     my @tests = (
         [{ email => $email },
