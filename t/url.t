@@ -44,6 +44,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
          },
          "$base?gravatar_id=$id&rating=r&size=80&default=%2Flocal.png"
         ],
+
         [{ default => "/local.png",
            border  => 'AAB',
            rating  => 'PG',
@@ -53,6 +54,16 @@ BEGIN { use_ok 'Gravatar::URL'; }
          "$base?gravatar_id=$id&rating=pg&size=45&default=%2Flocal.png&border=AAB"
         ],
     );
+
+    # Add tests for the special defaults.
+    for my $special ("identicon", "monsterid", "wavatar") {
+        my $test = [{ default => $special,
+                      email   => $email,
+                    },
+                    "$base?gravatar_id=$id&default=$special",
+                   ];
+        push @tests, $test;
+    }
 
     for my $test (@tests) {
         my($args, $url ) = @$test;
