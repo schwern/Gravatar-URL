@@ -1,4 +1,4 @@
-1.01
+1.01  Thu Apr  9 13:11:32 PDT 2009
     Protocol Updates
     (The Gravatar protocol changed, so we're changing with it)
     * Gravatar expanded the max size to 512.
