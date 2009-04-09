@@ -1,5 +1,7 @@
 #!/usr/bin/perl -w
 
+use 5.006;
+
 use strict;
 use Module::Build;
 
@@ -14,14 +16,23 @@ my $builder = Module::Build->new(
             repository =>
               'http://svn.schwern.org/svn/CPAN/Gravatar-URL',
         },
+
         keywords => [ 'Gravatar' ],
+
+        configure_requires => {
+            'Module::Build'     => 0.2808
+        },
+    },
+
+    build_requires      => {
+        'Test::More'        => 0.40,
     },
 
     requires             => {
-        'Test::More'        => 0.40,
         'URI::Escape'       => 0,
         'Digest::MD5'       => 0,
         'Carp'              => 0,
+        perl                => '5.6.0',
     },
 );
 

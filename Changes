@@ -1,2 +1,13 @@
+1.00  Sun Apr 27 14:12:24 PDT 2008
+    Bug Fixes
+    * Gravatar IDs are insensitive to the case of the email address.
+
+    Doc Fixes
+    * Clarified how relative default URLs will be handled
+
+    Dist Fixes
+    * Added a configure_requires on Module::Build and a requires on perl 5.6.
+
+
 0.01  Sat Sep  8 00:59:04 PDT 2007
 First release, stealing liberally from Template::Plugin::Gravatar
