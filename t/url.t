@@ -89,7 +89,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
     }
 
     for my $test (@tests) {
-        my($args, $url ) = @$test;
+        my($args, $url) = @$test;
         is gravatar_url( %$args ), $url, join ", ", keys %$args;
     }
 }
