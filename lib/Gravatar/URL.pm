@@ -86,8 +86,9 @@ Relative URLs will be relative to the base (ie. gravatar.com), not your web site
 
 Gravatar defines special values that you may use as a default to
 produce dynamic default images. These are "identicon", "monsterid" and
-"wavatar".  See L<http://en.gravatar.com/site/implement/url> for more
-info.
+"wavatar".  "404" will cause the URL to return an HTTP 404 "Not Found"
+error instead.  See L<http://en.gravatar.com/site/implement/url> for
+more info.
 
 If omitted, Gravatar will serve up their default image, the blue G.
 
