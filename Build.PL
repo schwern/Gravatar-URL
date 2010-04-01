@@ -34,6 +34,7 @@ my $builder = Module::Build->new(
         'Digest::MD5'       => 0,
         'Carp'              => 0,
         perl                => '5.6.0',
+        'parent'            => 0,
     },
 );
 

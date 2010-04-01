@@ -1,4 +1,8 @@
 1.02
+    New Features
+    * Added Unicornify::URL for generated unicorn avatars, OMG!!!
+      http://unicornify.appspot.com/whats-this
+
     Incompatible Changes
     * short_keys is now the default, as per Gravatar protocol documentation
 

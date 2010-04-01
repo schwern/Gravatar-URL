@@ -9,7 +9,7 @@ use Carp;
 
 our $VERSION = '1.01';
 
-use base 'Exporter';
+use parent 'Exporter';
 our @EXPORT = qw(
     gravatar_id
     gravatar_url
