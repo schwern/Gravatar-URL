@@ -17,5 +17,5 @@ warning_is {
         id   => '12345',
         base => 'http://www.example.com/gravatar',
         border => "FFF"
-    ), "http://www.example.com/gravatar/12345?border=FFF";
+    ), "http://www.example.com/gravatar/12345?b=FFF";
 } {carped => "The border key is deprecated"};

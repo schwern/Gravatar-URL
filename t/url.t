@@ -34,14 +34,14 @@ BEGIN { use_ok 'Gravatar::URL'; }
         [{ default => "/local.png",
            email   => $email
          },
-         "$base/$id?default=%2Flocal.png",
+         "$base/$id?d=%2Flocal.png",
         ],
         
         [{ default => "/local.png",
            rating  => 'X',
            email   => $email,
          },
-         "$base/$id?rating=x&default=%2Flocal.png",
+         "$base/$id?r=x&d=%2Flocal.png",
         ],
         
         [{ default  => "/local.png",
@@ -49,7 +49,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
            rating   => 'R',
            size     => 80
          },
-         "$base/$id?rating=r&size=80&default=%2Flocal.png"
+         "$base/$id?r=r&s=80&d=%2Flocal.png"
         ],
 
         [{ default => "/local.png",
@@ -57,7 +57,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
            size    => 45,
            email   => $email,
          },
-         "$base/$id?rating=pg&size=45&default=%2Flocal.png"
+         "$base/$id?r=pg&s=45&d=%2Flocal.png"
         ],
 
         [{ default => "/local.png",
@@ -65,7 +65,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
            size    => 45,
            email   => $email,
          },
-         "$base/$id?rating=pg&size=45&default=%2Flocal.png"
+         "$base/$id?r=pg&s=45&d=%2Flocal.png"
         ],
 
         [{ default => "/local.png",
@@ -76,6 +76,14 @@ BEGIN { use_ok 'Gravatar::URL'; }
          },
          "$base/$id?r=pg&s=45&d=%2Flocal.png"
         ],
+        [{ default => "/local.png",
+           rating  => 'PG',
+           size    => 45,
+           email   => $email,
+           short_keys => 0,
+         },
+         "$base/$id?rating=pg&size=45&default=%2Flocal.png"
+        ],
     );
 
     # Add tests for the special defaults.
@@ -83,7 +91,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
         my $test = [{ default => $special,
                       email   => $email,
                     },
-                    "$base/$id?default=$special",
+                    "$base/$id?d=$special",
                    ];
         push @tests, $test;
     }

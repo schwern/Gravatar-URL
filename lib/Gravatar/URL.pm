@@ -114,9 +114,14 @@ L<http://www.gravatar.com/avatar/">.
 If true, use short key names when constructing the URL.  "s" instead
 of "size", "r" instead of "ratings" and so on.
 
-short_keys defaults to false, but may default to true in the future.
+short_keys defaults to true.
 
 =cut
+
+my %defaults = (
+    short_keys  => 1,
+    base        => $Gravatar_Base
+);
 
 sub gravatar_url {
     my %args = @_;
@@ -127,7 +132,7 @@ sub gravatar_url {
     exists $args{id} xor exists $args{email} or
         croak "Both an id and an email were given.  gravatar_url() only takes one";
 
-    my $base = $args{base} || $Gravatar_Base;
+    _apply_defaults(\%args, \%defaults);
 
     if ( exists $args{size} ) {
         $args{size} >= 1 and $args{size} <= 512
@@ -151,6 +156,7 @@ sub gravatar_url {
     $args{default} = uri_escape($args{default})
         if $args{default};
 
+    # Use a fixed order to make testing easier
     my @pairs;
     for my $arg ( qw( rating size default border ) ) {
         next unless exists $args{$arg};
@@ -160,7 +166,7 @@ sub gravatar_url {
         push @pairs, join("=", $key, $args{$arg});
     }
 
-    my $uri = $base;
+    my $uri = $args{base};
     $uri   .= "/" unless $uri =~ m{/$};
     $uri   .= $args{gravatar_id};
     $uri   .= "?".join("&",@pairs) if @pairs;
@@ -168,6 +174,17 @@ sub gravatar_url {
     return $uri;
 }
 
+
+sub _apply_defaults {
+    my($hash, $defaults) = @_;
+
+    for my $key (keys %$defaults) {
+        next if exists $hash->{$key};
+        $hash->{$key} = $defaults->{$key};
+    }
+
+    return;
+}
 
 =head3 B<gravatar_id>
 

@@ -1,4 +1,7 @@
 1.02
+    Incompatible Changes
+    * short_keys is now the default, as per Gravatar protocol documentation
+
     Protocol Updates
     * Document that Gravatar has a new default option, 404.
 
