@@ -3,6 +3,8 @@ package Unicornify::URL;
 use strict;
 use warnings;
 
+our $VERSION = '1.02';
+
 use Gravatar::URL qw(gravatar_url);
 
 use parent 'Exporter';

@@ -1,9 +1,12 @@
 Build.PL
 Changes
 lib/Gravatar/URL.pm
+lib/Unicornify/URL.pm
 MANIFEST
+MANIFEST.SKIP
 META.yml
 t/deprecated.t
 t/error.t
 t/id.t
+t/unicornify.t
 t/url.t
