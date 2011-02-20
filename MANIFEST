@@ -2,7 +2,7 @@ Build.PL
 Changes
 lib/Gravatar/URL.pm
 lib/Unicornify/URL.pm
-MANIFEST
+MANIFEST			This list of files
 MANIFEST.SKIP
 META.yml
 t/deprecated.t
