@@ -87,7 +87,7 @@ BEGIN { use_ok 'Gravatar::URL'; }
     );
 
     # Add tests for the special defaults.
-    for my $special ("identicon", "monsterid", "wavatar") {
+    for my $special ("identicon", "mm", "monsterid", "retro", "wavatar") {
         my $test = [{ default => $special,
                       email   => $email,
                     },
