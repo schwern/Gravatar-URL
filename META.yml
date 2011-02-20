@@ -18,6 +18,9 @@ provides:
   Gravatar::URL:
     file: lib/Gravatar/URL.pm
     version: 1.02
+  Libravatar::URL:
+    file: lib/Libravatar/URL.pm
+    version: 1.02
   Unicornify::URL:
     file: lib/Unicornify/URL.pm
     version: 1.02

@@ -1,6 +1,7 @@
 Build.PL
 Changes
 lib/Gravatar/URL.pm
+lib/Libravatar/URL.pm
 lib/Unicornify/URL.pm
 MANIFEST
 MANIFEST.SKIP
