@@ -85,8 +85,8 @@ The url to use if the user has no gravatar or has none that fits your rating req
 Relative URLs will be relative to the base (ie. gravatar.com), not your web site.
 
 Gravatar defines special values that you may use as a default to
-produce dynamic default images. These are "identicon", "monsterid" and
-"wavatar".  "404" will cause the URL to return an HTTP 404 "Not Found"
+produce dynamic default images. These are "identicon", "monsterid",
+"wavatar" and "retro".  "404" will cause the URL to return an HTTP 404 "Not Found"
 error instead.  See L<http://en.gravatar.com/site/implement/url> for
 more info.
 
