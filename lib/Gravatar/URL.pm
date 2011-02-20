@@ -109,6 +109,9 @@ This is the URL of the location of the Gravatar server you wish to
 grab Gravatars from.  Defaults to
 L<http://www.gravatar.com/avatar/">.
 
+You should use L<https://secure.gravatar.com/avatar/> if you want
+to serve avatars over HTTPS.
+
 =head4 short_keys
 
 If true, use short key names when constructing the URL.  "s" instead
