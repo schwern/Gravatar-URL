@@ -102,6 +102,7 @@ my %defaults = (
 # Extra the domain component of an email address
 sub email_domain {
     my ( $email ) = @_;
+    return undef unless $email;
 
     if ( $email =~ m/@([^@]+)$/ ) {
         return $1;
@@ -136,6 +137,7 @@ sub build_url {
 sub federated_url {
     my ( $email ) = @_;
     my $domain = email_domain($email);
+    return undef unless $domain;
 
     my $resolver = Net::DNS::Resolver->new;
     my $packet = $resolver->query('_avatars._tcp.' . $domain, 'SRV');

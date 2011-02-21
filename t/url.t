@@ -2,12 +2,27 @@
 
 use Test::More 'no_plan';
 
-BEGIN { use_ok 'Gravatar::URL'; }
+BEGIN { use_ok 'Gravatar::URL';
+        use_ok 'Libravatar::URL'; }
 
-{
+my %interfaces = (
+    libravatar => {
+        func => \&libravatar_url,
+        base => 'http://cdn.libravatar.org/avatar',
+    },
+    gravatar => {
+        func => \&gravatar_url,
+        base => 'http://www.gravatar.com/avatar',
+    },
+);
+
+for my $interface_name (keys %interfaces) {
+    my $interface = $interfaces{$interface_name};
+    my $base = $interface->{base};
+    my $func = $interface->{func};
+
     my $id = 'a60fc0828e808b9a6a9d50f1792240c8';
     my $email = 'whatever@wherever.whichever';
-    my $base = 'http://www.gravatar.com/avatar';
 
     my @tests = (
         [{ email => $email },
@@ -98,7 +113,6 @@ BEGIN { use_ok 'Gravatar::URL'; }
 
     for my $test (@tests) {
         my($args, $url) = @$test;
-        is gravatar_url( %$args ), $url, join ", ", keys %$args;
+        is &$func( %$args ), $url, join ", ", keys %$args;
     }
 }
-
