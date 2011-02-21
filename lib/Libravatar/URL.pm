@@ -8,9 +8,13 @@ our $VERSION = '1.02';
 use Net::DNS;
 use Gravatar::URL qw(gravatar_url);
 
+# FIXME: only libravatar_url should be exported (the other ones are just there for the test suite)
 use parent 'Exporter';
 our @EXPORT = qw(
     libravatar_url
+    build_url
+    email_domain
+    srv_hostname
 );
 
 my $Libravatar_Base = "http://cdn.libravatar.org/avatar";
@@ -109,7 +113,7 @@ sub email_domain {
 sub srv_hostname {
     my @records = @_;
 
-    # TODO: honour $rr->priority and $rr->weight
+    # TODO: honour $rr->priority and $rr->weight using Net::DNS::RR::SRV::Helper
     foreach my $rr (@records) {
         return ( $rr->target, $rr->port );
     }
@@ -118,9 +122,10 @@ sub srv_hostname {
 # Convert (target, port) to a full avatar base URL
 sub build_url {
     my ( $target, $port ) = @_;
+    return undef unless $target;
 
     my $url = 'http://' . $target;
-    if ( $port != 80 ) {
+    if ( $port && ($port != 80) ) {
         $url .= ':' . $port;
     }
     $url .= '/avatar';

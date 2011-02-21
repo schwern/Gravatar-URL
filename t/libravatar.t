@@ -1,32 +1,91 @@
 #!/usr/bin/perl -w
 
-# Unfortunately, these tests require network access :(
+use Test::More;
 
-use Test::More 'no_plan';
-
-BEGIN { use_ok 'Libravatar::URL'; }
+BEGIN { use_ok 'Net::DNS';
+        use_ok 'Libravatar::URL'; }
 
 {
-    my $id = 'a60fc0828e808b9a6a9d50f1792240c8';
-    my $email = 'whatever@wherever.whichever';
-    my $base = 'http://cdn.libravatar.org/avatar';
-
-    my $id2 = 'e3c7bce0f581c8911b4979e2f54da1de';
-    my $email2 = 'francois+1@catalyst.net.nz';
-    my $base2 = 'http://static.avatars.catalyst.net.nz/avatar';
-
-    my @tests = (
-        [{ email => $email },
-         "$base/$id",
+    my @domain_tests = (
+        ['',
+         undef,
         ],
 
-        [{ email => $email2 },
-         "$base2/$id2",
+        ['notanemail',
+         undef,
+        ],
+
+        ['larry@example.com',
+         'example.com',
+        ],
+
+        ['larry@example.com@example.org',
+         'example.org',
+        ],
+
+        ['@example.org',
+         'example.org',
+        ],
+
+        ['larry@@example.com',
+         'example.com',
         ],
     );
 
-    for my $test (@tests) {
-        my($args, $url) = @$test;
-        is libravatar_url( %$args ), $url, join ", ", keys %$args;
+    for my $test (@domain_tests) {
+        my ($email, $domain) = @$test;
+        is email_domain($email), $domain;
     }
+
+    my @url_tests = (
+        [undef, undef,
+         undef,
+        ],
+
+        ['example.com', undef,
+         'http://example.com/avatar',
+        ],
+
+        ['example.com', 80,
+         'http://example.com/avatar',
+        ],
+
+        ['example.com', 81,
+         'http://example.com:81/avatar',
+        ],
+    );
+
+    for my $test (@url_tests) {
+        my ($target, $port, $url) = @$test;
+        is build_url($target, $port), $url;
+    }
+
+    my @srv_tests = (
+        [['_avatars._tcp.example.com. IN SRV 0 0 80 avatars.example.com',
+         ],
+         ['avatars.example.com', 80],
+        ],
+
+        [['_avatars._tcp.example.com. IN SRV 0 0 80 avatars.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 0 80 avatars2.example.com',
+         ],
+         ['avatars.example.com', 80],
+        ],
+    );
+
+    for my $test (@srv_tests) {
+        my ($srv_strings, $pair) = @$test;
+
+        my @srv_records = ();
+        for $str (@$srv_strings) {
+            my $record = Net::DNS::RR->new($str);
+            push @srv_records, $record;
+        }
+
+        my @result = srv_hostname(@srv_records);
+        is_deeply \@result, $pair;
+    }
+
+    $test_count = @domain_tests + @url_tests + @srv_tests + 2;
+    done_testing($test_count);
 }
