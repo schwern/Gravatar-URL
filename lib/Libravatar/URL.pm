@@ -139,8 +139,8 @@ sub federated_url {
     my $domain = email_domain($email);
     return undef unless $domain;
 
-    my $resolver = Net::DNS::Resolver->new;
-    my $packet = $resolver->query('_avatars._tcp.' . $domain, 'SRV');
+    my $fast_resolver = Net::DNS::Resolver->new(retry => 1, tcp_timeout => 1, udp_timeout => 1, dnssec => 1);
+    my $packet = $fast_resolver->query('_avatars._tcp.' . $domain, 'SRV');
 
     if ( $packet and $packet->answer ) {
         my ( $target, $port ) = srv_hostname($packet->answer);
