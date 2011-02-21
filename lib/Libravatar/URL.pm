@@ -95,30 +95,49 @@ my %defaults = (
     short_keys => 1,
 );
 
-sub federated_url {
+# Extra the domain component of an email address
+sub email_domain {
     my ( $email ) = @_;
 
-    my $domain = undef;
     if ( $email =~ m/@([^@]+)$/ ) {
-        $domain = $1;
+        return $1;
     }
-    return undef unless $domain;
+    return undef;
+}
+
+# Return the right (target, port) pair from a list of SRV records
+sub srv_hostname {
+    my @records = @_;
+
+    # TODO: honour $rr->priority and $rr->weight
+    foreach my $rr (@records) {
+        return ( $rr->target, $rr->port );
+    }
+}
+
+# Convert (target, port) to a full avatar base URL
+sub build_url {
+    my ( $target, $port ) = @_;
+
+    my $url = 'http://' . $target;
+    if ( $port != 80 ) {
+        $url .= ':' . $port;
+    }
+    $url .= '/avatar';
+
+    return $url;
+}
+
+sub federated_url {
+    my ( $email ) = @_;
+    my $domain = email_domain($email);
 
     my $resolver = Net::DNS::Resolver->new;
     my $packet = $resolver->query('_avatars._tcp.' . $domain, 'SRV');
 
     if ( $packet and $packet->answer ) {
-        my @records = $packet->answer;
-
-        # TODO: honour $rr->priority and $rr->weight
-        foreach my $rr (@records) {
-            if ( 80 == $rr->port ) {
-                return 'http://' . $rr->target . '/avatar';
-            }
-            else {
-                return 'http://' . $rr->target . ':' . $rr->port .'/avatar';
-            }
-        }
+        my ( $target, $port ) = srv_hostname($packet->answer);
+        return build_url($target, $port);
     }
     return undef;
 }
