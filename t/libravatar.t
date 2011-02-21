@@ -34,7 +34,7 @@ BEGIN { use_ok 'Net::DNS';
 
     for my $test (@domain_tests) {
         my ($email, $domain) = @$test;
-        is email_domain($email), $domain;
+        is Libravatar::URL::email_domain($email), $domain;
     }
 
     my @url_tests = (
@@ -57,7 +57,7 @@ BEGIN { use_ok 'Net::DNS';
 
     for my $test (@url_tests) {
         my ($target, $port, $url) = @$test;
-        is build_url($target, $port), $url;
+        is Libravatar::URL::build_url($target, $port), $url;
     }
 
     my @srv_tests = (
@@ -82,7 +82,7 @@ BEGIN { use_ok 'Net::DNS';
             push @srv_records, $record;
         }
 
-        my @result = srv_hostname(@srv_records);
+        my @result = Libravatar::URL::srv_hostname(@srv_records);
         is_deeply \@result, $pair;
     }
 

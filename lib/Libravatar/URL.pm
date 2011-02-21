@@ -8,13 +8,9 @@ our $VERSION = '1.02';
 use Net::DNS;
 use Gravatar::URL qw(gravatar_url);
 
-# FIXME: only libravatar_url should be exported (the other ones are just there for the test suite)
 use parent 'Exporter';
 our @EXPORT = qw(
     libravatar_url
-    build_url
-    email_domain
-    srv_hostname
 );
 
 my $Libravatar_Base = "http://cdn.libravatar.org/avatar";
