@@ -126,12 +126,12 @@ sub federated_url {
 sub libravatar_url {
     my %args = @_;
 
-    my $federated_url = federated_url($args{email});
-    if ( $federated_url ) {
-        $defaults{base} = $federated_url;
-    }
-    else {
-        $defaults{base} = $Libravatar_Base;
+    $defaults{base} = $Libravatar_Base;
+    if ( !$args{base} ) {
+        my $federated_url = federated_url($args{email});
+        if ( $federated_url ) {
+            $defaults{base} = $federated_url;
+        }
     }
 
     Gravatar::URL::_apply_defaults(\%args, \%defaults);
