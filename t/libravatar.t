@@ -61,17 +61,74 @@ BEGIN { use_ok 'Net::DNS';
     }
 
     my @srv_tests = (
+        [[
+         ],
+         [undef, undef],
+        ],
+
         [['_avatars._tcp.example.com. IN SRV 0 0 80 avatars.example.com',
          ],
          ['avatars.example.com', 80],
         ],
 
-        [['_avatars._tcp.example.com. IN SRV 0 0 80 avatars.example.com',
-          '_avatars._tcp.example.com. IN SRV 10 0 80 avatars2.example.com',
+        [['_avatars._tcp.example.com. IN SRV 10 0 81 avatars2.example.com',
+          '_avatars._tcp.example.com. IN SRV 0 0 80 avatars.example.com',
          ],
          ['avatars.example.com', 80],
         ],
+
+        [['_avatars._tcp.example.com. IN SRV 10 0 83 avatars4.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 0 82 avatars3.example.com',
+          '_avatars._tcp.example.com. IN SRV 1 0 81 avatars21.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 0 80 avatars.example.com',
+         ],
+         ['avatars21.example.com', 81],
+        ],
+
+        # The following ones are randomly selected which is why we
+        # have to initialize the random number to a canned value
+
+        # random_number = 49
+        [['_avatars._tcp.example.com. IN SRV 10 1 83 avatars4.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 5 82 avatars3.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 10 8100 avatars2.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 50 800 avatars1.example.com',
+          '_avatars._tcp.example.com. IN SRV 20 0 80 avatars.example.com',
+         ],
+         ['avatars1.example.com', 800],
+        ],
+
+        # random_number = 0
+        [['_avatars._tcp.example.com. IN SRV 10 1 83 avatars4.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 0 82 avatars3.example.com',
+          '_avatars._tcp.example.com. IN SRV 20 0 81 avatars2.example.com',
+          '_avatars._tcp.example.com. IN SRV 20 0 80 avatars.example.com',
+         ],
+         ['avatars3.example.com', 82],
+        ],
+
+        # random_number = 1
+        [['_avatars._tcp.example.com. IN SRV 10 0 83 avatars4.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 0 82 avatars3.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 10 601 avatars20.example.com',
+          '_avatars._tcp.example.com. IN SRV 20 0 80 avatars.example.com',
+         ],
+         ['avatars20.example.com', 601],
+        ],
+
+        # random_number = 40
+        [['_avatars._tcp.example.com. IN SRV 10 1 83 avatars4.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 5 82 avatars3.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 10 8100 avatars2.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 30 8 avatars10.example.com',
+          '_avatars._tcp.example.com. IN SRV 10 50 800 avatars1.example.com',
+          '_avatars._tcp.example.com. IN SRV 20 0 80 avatars.example.com',
+         ],
+         ['avatars10.example.com', 8],
+        ],
     );
+
+    srand(42); # to make these tests predictable
 
     for my $test (@srv_tests) {
         my ($srv_strings, $pair) = @$test;

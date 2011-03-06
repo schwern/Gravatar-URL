@@ -109,11 +109,59 @@ sub email_domain {
 # Return the right (target, port) pair from a list of SRV records
 sub srv_hostname {
     my @records = @_;
+    return ( undef, undef ) unless scalar(@records) > 0;
 
-    # TODO: honour $rr->priority and $rr->weight using Net::DNS::RR::SRV::Helper
-    foreach my $rr (@records) {
+    if ( 1 == scalar(@records) ) {
+        my $rr = shift @records;
         return ( $rr->target, $rr->port );
     }
+
+    # Keep only the servers in the top priority
+    my @priority_records;
+    my $total_weight = 0;
+    my $top_priority = $records[0]->priority; # highest priority = lowest number
+
+    foreach my $rr (@records) {
+        if ( $rr->priority > $top_priority ) {
+            # ignore the record ($rr has lower priority)
+            next;
+        }
+        elsif ( $rr->priority < $top_priority ) {
+            # reset the array ($rr has higher priority)
+            $top_priority = $rr->priority;
+            $total_weight = 0;
+            @priority_records = ();
+        }
+
+        $total_weight += $rr->weight;
+
+        if ( $rr->weight > 0 ) {
+            push @priority_records, [ $total_weight, $rr ];
+        }
+        else {
+            # Zero-weigth elements must come first
+            unshift @priority_records, [ 0, $rr ];
+        }
+    }
+
+    if ( 1 == scalar(@priority_records) ) {
+        my $record = shift @priority_records;
+        my ( $weighted_index, $rr ) = @$record;
+        return ( $rr->target, $rr->port );
+    }
+
+    # Select first record according to RFC2782 weight ordering algorithm (page 3)
+    my $random_number = int(rand($total_weight + 1));
+
+    foreach my $record (@priority_records) {
+        my ( $weighted_index, $rr ) = @$record;
+
+        if ( $weighted_index >= $random_number ) {
+            return ( $rr->target, $rr->port );
+        }
+    }
+
+    die 'There is something wrong with our SRV weight ordering algorithm';
 }
 
 # Convert (target, port) to a full avatar base URL
