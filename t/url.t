@@ -9,16 +9,19 @@ my %interfaces = (
     libravatar => {
         func => \&libravatar_url,
         base => 'http://cdn.libravatar.org/avatar',
+        https_base => 'https://seccdn.libravatar.org/avatar',
     },
     gravatar => {
         func => \&gravatar_url,
         base => 'http://www.gravatar.com/avatar',
+        https_base => 'https://secure.gravatar.com/avatar',
     },
 );
 
 for my $interface_name (keys %interfaces) {
     my $interface = $interfaces{$interface_name};
     my $base = $interface->{base};
+    my $https_base = $interface->{https_base};
     my $func = $interface->{func};
 
     my $id = 'a60fc0828e808b9a6a9d50f1792240c8';
@@ -34,7 +37,26 @@ for my $interface_name (keys %interfaces) {
         ],
         
         [{ email => $email,
+           https => 1
+         },
+         "$https_base/$id",
+        ],
+
+        [{ email => $email,
+           https => 0
+         },
+         "$base/$id",
+        ],
+
+        [{ email => $email,
            base  => 'http://example.com/gravatar'
+         },
+         "http://example.com/gravatar/$id",
+        ],
+
+        [{ email => $email,
+           base  => 'http://example.com/gravatar',
+           https => 1
          },
          "http://example.com/gravatar/$id",
         ],

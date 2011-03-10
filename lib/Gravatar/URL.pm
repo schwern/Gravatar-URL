@@ -15,8 +15,8 @@ our @EXPORT = qw(
     gravatar_url
 );    
 
-my $Gravatar_Base = "http://www.gravatar.com/avatar/";
-
+my $Gravatar_Http_Base  = "http://www.gravatar.com/avatar/";
+my $Gravatar_Https_Base = "https://secure.gravatar.com/avatar/";
 
 =head1 NAME
 
@@ -108,10 +108,8 @@ like that, pass in the color to border as a 3 or 6 digit hex string.
 
 This is the URL of the location of the Gravatar server you wish to
 grab Gravatars from.  Defaults to
-L<http://www.gravatar.com/avatar/">.
-
-You should use L<https://secure.gravatar.com/avatar/> if you want
-to serve avatars over HTTPS.
+L<http://www.gravatar.com/avatar/"> for HTTP and
+L<https://secure.gravatar.com/avatar/> for HTTPS.
 
 =head4 short_keys
 
@@ -120,11 +118,22 @@ of "size", "r" instead of "ratings" and so on.
 
 short_keys defaults to true.
 
+=head4 https
+
+If true, serve avatars over HTTPS instead of HTTP.
+
+You should select this option if your site is served over HTTPS to
+avoid browser warnings about the presence of insecure content.
+
+https defaults to false.
+
 =cut
 
 my %defaults = (
     short_keys  => 1,
-    base        => $Gravatar_Base
+    base_http   => $Gravatar_Http_Base,
+    base_https  => $Gravatar_Https_Base,
+    https       => 0,
 );
 
 sub gravatar_url {
@@ -183,8 +192,13 @@ sub _apply_defaults {
     my($hash, $defaults) = @_;
 
     for my $key (keys %$defaults) {
+        next if 'base_http' eq $key or 'base_https' eq $key;
         next if exists $hash->{$key};
         $hash->{$key} = $defaults->{$key};
+    }
+
+    if (not exists $hash->{'base'}) {
+        $hash->{'base'} = $hash->{'https'} ? $defaults->{base_https} : $defaults->{base_http};
     }
 
     return;

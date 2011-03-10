@@ -13,8 +13,8 @@ our @EXPORT = qw(
     libravatar_url
 );
 
-my $Libravatar_Base = "http://cdn.libravatar.org/avatar";
-
+my $Libravatar_Http_Base  = "http://cdn.libravatar.org/avatar";
+my $Libravatar_Https_Base = "https://seccdn.libravatar.org/avatar";
 
 =head1 NAME
 
@@ -73,10 +73,8 @@ If omitted, Libravatar will serve up their default image, the orange butterfly.
 
 This is the URL of the location of the Libravatar server you wish to
 grab avatars from.  Defaults to
-L<http://cdn.libravatar.org/avatar/>.
-
-You should use L<https://seccdn.libravatar.org/avatar/> if you want
-to serve avatars over HTTPS.
+L<http://cdn.libravatar.org/avatar/> for HTTP and
+L<https://seccdn.libravatar.org/avatar/> for HTTPS.
 
 =head4 short_keys
 
@@ -84,6 +82,15 @@ If true, use short key names when constructing the URL.  "s" instead
 of "size", "d" instead of "default" and so on.
 
 short_keys defaults to true.
+
+=head4 https
+
+If true, serve avatars over HTTPS instead of HTTP.
+
+You should select this option if your site is served over HTTPS to
+avoid browser warnings about the presence of insecure content.
+
+https defaults to false.
 
 =head1 SEE ALSO
 
@@ -166,11 +173,11 @@ sub srv_hostname {
 
 # Convert (target, port) to a full avatar base URL
 sub build_url {
-    my ( $target, $port ) = @_;
+    my ( $target, $port, $https ) = @_;
     return undef unless $target;
 
-    my $url = 'http://' . $target;
-    if ( $port && ($port != 80) ) {
+    my $url = $https ? 'https' : 'http' . '://' . $target;
+    if ( $port && !$https && ($port != 80) or $port && $https && ($port != 443) ) {
         $url .= ':' . $port;
     }
     $url .= '/avatar';
@@ -179,32 +186,36 @@ sub build_url {
 }
 
 sub federated_url {
-    my ( $email ) = @_;
+    my ( $email, $https ) = @_;
     my $domain = email_domain($email);
     return undef unless $domain;
 
     my $fast_resolver = Net::DNS::Resolver->new(retry => 1, tcp_timeout => 1, udp_timeout => 1, dnssec => 1);
-    my $packet = $fast_resolver->query('_avatars._tcp.' . $domain, 'SRV');
+    my $srv_prefix = $https ? '_avatars-sec' : '_avatars';
+    my $packet = $fast_resolver->query($srv_prefix . '._tcp.' . $domain, 'SRV');
 
     if ( $packet and $packet->answer ) {
         my ( $target, $port ) = srv_hostname($packet->answer);
-        return build_url($target, $port);
+        return build_url($target, $port, $https);
     }
     return undef;
 }
 
 sub libravatar_url {
     my %args = @_;
+    my $custom_base = defined $args{base};
 
-    $defaults{base} = $Libravatar_Base;
-    if ( !$args{base} ) {
-        my $federated_url = federated_url($args{email});
+    $defaults{base_http} = $Libravatar_Http_Base;
+    $defaults{base_https} = $Libravatar_Https_Base;
+    Gravatar::URL::_apply_defaults(\%args, \%defaults);
+
+    if ( !$custom_base ) {
+        my $federated_url = federated_url($args{email}, $args{https});
         if ( $federated_url ) {
-            $defaults{base} = $federated_url;
+            $args{base} = $federated_url;
         }
     }
 
-    Gravatar::URL::_apply_defaults(\%args, \%defaults);
     return gravatar_url(%args);
 }
 
