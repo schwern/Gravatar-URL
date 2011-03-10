@@ -2,6 +2,7 @@
     New Features
     * Added Libravatar::URL for federated avatar hosting with a Gravatar
       fallback. (http://www.libravatar.org)
+    * Add new optional 'https' parameter to deliver avatars over HTTPS.
 
     New Docs
     * Updated the defaults with the new "retro" and mystery man values.
