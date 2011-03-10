@@ -5,7 +5,6 @@ use warnings;
 
 our $VERSION = '1.02';
 
-use Net::DNS;
 use Gravatar::URL qw(gravatar_url);
 
 use parent 'Exporter';
@@ -186,6 +185,7 @@ sub federated_url {
     my $domain = email_domain($email);
     return undef unless $domain;
 
+    require Net::DNS::Resolver;
     my $fast_resolver = Net::DNS::Resolver->new(retry => 1, tcp_timeout => 1, udp_timeout => 1, dnssec => 1);
     my $srv_prefix = $https ? '_avatars-sec' : '_avatars';
     my $packet = $fast_resolver->query($srv_prefix . '._tcp.' . $domain, 'SRV');
