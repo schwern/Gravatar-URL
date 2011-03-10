@@ -92,10 +92,6 @@ avoid browser warnings about the presence of insecure content.
 
 https defaults to false.
 
-=head1 SEE ALSO
-
-L<Gravatar::URL>
-
 =cut
 
 my %defaults = (
@@ -218,5 +214,23 @@ sub libravatar_url {
 
     return gravatar_url(%args);
 }
+
+=head1 LICENSE
+
+Copyright 2011, Francois Marier <fmarier@gmail.com>.
+
+This program is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself.
+
+See F<http://www.perl.com/perl/misc/Artistic.html>
+
+
+=head1 SEE ALSO
+
+L<http://www.libravatar.org> - The Libravatar web site
+
+L<http://www.libravatar.org/api> - The Libravatar API documentation
+
+=cut
 
 1;

@@ -228,6 +228,7 @@ original code.
 =head1 LICENSE
 
 Copyright 2007 - 2009, Michael G Schwern <schwern@pobox.com>.
+Copyright 2011, Francois Marier <fmarier@gmail.com>.
 
 This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
