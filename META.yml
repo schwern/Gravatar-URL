@@ -1,37 +1,38 @@
 ---
-abstract: 'Make URLs for Gravatars from an email address'
-author: []
-build_requires:
-  Test::More: 0.4
-  Test::Warn: 0.11
-configure_requires:
-  Module::Build: 0.2808
-generated_by: 'Module::Build version 0.3603'
-keywords:
-  - Gravatar
-license: perl
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
 name: Gravatar-URL
-provides:
-  Gravatar::URL:
-    file: lib/Gravatar/URL.pm
-    version: 1.02
-  Libravatar::URL:
-    file: lib/Libravatar/URL.pm
-    version: 1.02
-  Unicornify::URL:
-    file: lib/Unicornify/URL.pm
-    version: 1.02
-requires:
-  Carp: 0
-  Digest::MD5: 0
-  URI::Escape: 0
-  parent: 0
-  perl: v5.6.0
+version: 1.03
+author: []
+abstract: Make URLs for Gravatars from an email address
+license: perl
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Gravatar-URL
   license: http://dev.perl.org/licenses/
   repository: http://github.com/schwern/gravatar-url/tree/master
-version: 1.02
+build_requires:
+  Test::More: 0.4
+  Test::Warn: 0.11
+requires:
+  Carp: 0
+  Digest::MD5: 0
+  Net::DNS::Resolver: 0
+  URI::Escape: 0
+  parent: 0
+  perl: v5.6.0
+configure_requires:
+  Module::Build: 0.2808
+provides:
+  Gravatar::URL:
+    file: lib/Gravatar/URL.pm
+    version: 1.03
+  Libravatar::URL:
+    file: lib/Libravatar/URL.pm
+    version: 1.03
+  Unicornify::URL:
+    file: lib/Unicornify/URL.pm
+    version: 1.03
+generated_by: Module::Build version 0.340201
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+keywords:
+  - Gravatar

@@ -9,5 +9,6 @@ META.yml
 t/deprecated.t
 t/error.t
 t/id.t
+t/libravatar.t
 t/unicornify.t
 t/url.t

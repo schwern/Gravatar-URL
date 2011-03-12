@@ -1,4 +1,4 @@
-1.03
+1.03  Sat Mar 12 18:17:03 NZDT 2011
     New Features
     * Added Libravatar::URL for federated avatar hosting with a Gravatar
       fallback. (http://www.libravatar.org)
@@ -9,6 +9,7 @@
     * Document the https base URL now available.
 
     New Co-Maintainer (Francois Marier)
+
 
 1.02  Thu Apr  1 15:36:52 PDT 2010
     New Features
