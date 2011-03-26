@@ -3,9 +3,11 @@ package Libravatar::URL;
 use strict;
 use warnings;
 
-our $VERSION = '1.03';
-
 use Gravatar::URL qw(gravatar_url);
+use Digest::MD5 qw(md5_hex);
+use Carp;
+
+our $VERSION = '1.04';
 
 use parent 'Exporter';
 our @EXPORT = qw(
@@ -33,9 +35,13 @@ See L<http://www.libravatar.org> for more information.
 
 =head3 B<libravatar_url>
 
+    # By email
     my $url = libravatar_url( email => $email, %options );
 
-Constructs a URL to fetch the Libravatar for the given $email address.
+    # By OpenID
+    my $url = libravatar_url( openid => $openid, %options );
+
+Constructs a URL to fetch the Libravatar for the given $email address or $openid URL.
 
 C<%options> are optional.  C<libravatar_url> will accept all the
 options of L<Gravatar::URL/gravatar_url> except for C<rating> and C<border>.
@@ -97,13 +103,24 @@ my %defaults = (
     short_keys => 1,
 );
 
-# Extra the domain component of an email address
+# Extract the domain component of an email address
 sub email_domain {
     my ( $email ) = @_;
     return undef unless $email;
 
     if ( $email =~ m/@([^@]+)$/ ) {
         return $1;
+    }
+    return undef;
+}
+
+# Extract the domain component of an OpenID URI
+sub openid_domain {
+    my ( $openid ) = @_;
+    return undef unless $openid;
+
+    if ( $openid =~ m@^(http|https)://([^/]+)@i ) {
+        return $2;
     }
     return undef;
 }
@@ -181,37 +198,66 @@ sub build_url {
 }
 
 sub federated_url {
-    my ( $email, $https ) = @_;
-    my $domain = email_domain($email);
+    my %args = @_;
+
+    my $domain;
+    if ( exists $args{email} ) {
+        $domain = email_domain($args{email});
+    }
+    elsif ( exists $args{openid} ) {
+        $domain = openid_domain($args{openid});
+    }
     return undef unless $domain;
 
     require Net::DNS::Resolver;
     my $fast_resolver = Net::DNS::Resolver->new(retry => 1, tcp_timeout => 1, udp_timeout => 1, dnssec => 1);
-    my $srv_prefix = $https ? '_avatars-sec' : '_avatars';
+    my $srv_prefix = $args{https} ? '_avatars-sec' : '_avatars';
     my $packet = $fast_resolver->query($srv_prefix . '._tcp.' . $domain, 'SRV');
 
     if ( $packet and $packet->answer ) {
         my ( $target, $port ) = srv_hostname($packet->answer);
-        return build_url($target, $port, $https);
+        return build_url($target, $port, $args{https});
     }
     return undef;
+}
+
+sub lowercase_openid {
+    my $openid = shift;
+
+    if ( $openid =~ m@^([^:]+://[^/]+)(.*)@ ) {
+        $openid = (lc $1) . $2;
+    }
+    return $openid;
 }
 
 sub libravatar_url {
     my %args = @_;
     my $custom_base = defined $args{base};
 
+    exists $args{email} or exists $args{openid} or exists $args{id} or
+        croak "Cannot generate a Libravatar URI without an email address, an OpenID or a gravatar id";
+
+    if ( exists $args{email} and (exists $args{openid} or exists $args{id}) or
+         exists $args{openid} and (exists $args{email} or exists $args{id}) or
+         exists $args{id} and (exists $args{email} or exists $args{openid}) ) {
+        croak "Two or more identifiers (email, OpenID or gravatar id) were given. libravatar_url() only takes one";
+    }
+
     $defaults{base_http} = $Libravatar_Http_Base;
     $defaults{base_https} = $Libravatar_Https_Base;
     Gravatar::URL::_apply_defaults(\%args, \%defaults);
 
     if ( !$custom_base ) {
-        my $federated_url = federated_url($args{email}, $args{https});
+        my $federated_url = federated_url(%args);
         if ( $federated_url ) {
             $args{base} = $federated_url;
         }
     }
 
+    if ( exists $args{openid} ) {
+        $args{id} = md5_hex(lowercase_openid($args{openid}));
+        undef $args{openid};
+    }
     return gravatar_url(%args);
 }
 

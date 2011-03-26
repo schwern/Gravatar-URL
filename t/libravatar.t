@@ -6,7 +6,7 @@ BEGIN { use_ok 'Net::DNS';
         use_ok 'Libravatar::URL'; }
 
 {
-    my @domain_tests = (
+    my @email_domain_tests = (
         ['',
          undef,
         ],
@@ -32,9 +32,79 @@ BEGIN { use_ok 'Net::DNS';
         ],
     );
 
-    for my $test (@domain_tests) {
+    for my $test (@email_domain_tests) {
         my ($email, $domain) = @$test;
         is Libravatar::URL::email_domain($email), $domain;
+    }
+
+    my @openid_domain_tests = (
+        ['',
+         undef,
+        ],
+
+        ['notanopenid',
+         undef,
+        ],
+
+        ['http://example.com',
+         'example.com',
+        ],
+
+        ['https://a.example.com',
+         'a.example.com',
+        ],
+
+        ['http://b.example.com/',
+         'b.example.com',
+        ],
+
+        ['http://example.org/id/larry',
+         'example.org',
+        ],
+
+        ['https://a.example.org/~larry/openid.html',
+         'a.example.org',
+        ],
+    );
+
+    for my $test (@openid_domain_tests) {
+        my ($openid, $domain) = @$test;
+        is Libravatar::URL::openid_domain($openid), $domain;
+    }
+
+    my @lowercase_openid = (
+        ['',
+         '',
+        ],
+
+        ['notanopenid',
+         'notanopenid',
+        ],
+
+        ['http://Example.Com',
+         'http://example.com',
+        ],
+
+        ['HTTPS://a.example.com',
+         'https://a.example.com',
+        ],
+
+        ['http://b.eXample.com/',
+         'http://b.example.com/',
+        ],
+
+        ['http://example.ORG/ID/Larry',
+         'http://example.org/ID/Larry',
+        ],
+
+        ['Https://A.example.org/~Larry/OpenID.html',
+         'https://a.example.org/~Larry/OpenID.html',
+        ],
+    );
+
+    for my $test (@lowercase_openid) {
+        my ($openid, $lc_openid) = @$test;
+        is Libravatar::URL::lowercase_openid($openid), $lc_openid;
     }
 
     my @url_tests = (
@@ -143,6 +213,6 @@ BEGIN { use_ok 'Net::DNS';
         is_deeply \@result, $pair;
     }
 
-    $test_count = @domain_tests + @url_tests + @srv_tests + 2;
+    $test_count = @email_domain_tests + @openid_domain_tests + @lowercase_openid + @url_tests + @srv_tests + 2;
     done_testing($test_count);
 }
