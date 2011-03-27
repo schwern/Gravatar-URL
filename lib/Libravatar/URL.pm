@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use Gravatar::URL qw(gravatar_url);
-use Digest::MD5 qw(md5_hex);
+use Digest::SHA qw(sha256_hex);
 use Carp;
 
 our $VERSION = '1.04';
@@ -255,7 +255,7 @@ sub libravatar_url {
     }
 
     if ( exists $args{openid} ) {
-        $args{id} = md5_hex(lowercase_openid($args{openid}));
+        $args{id} = sha256_hex(lowercase_openid($args{openid}));
         undef $args{openid};
     }
     return gravatar_url(%args);

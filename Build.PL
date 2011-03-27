@@ -33,6 +33,7 @@ my $builder = Module::Build->new(
         'Net::DNS::Resolver' => 0,
         'URI::Escape'        => 0,
         'Digest::MD5'        => 0,
+        'Digest::SHA'        => 0,
         'Carp'               => 0,
         perl                 => '5.6.0',
         'parent'             => 0,
