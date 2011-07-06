@@ -130,6 +130,30 @@ BEGIN { use_ok 'Net::DNS';
         is Libravatar::URL::build_url($target, $port), $url;
     }
 
+    my @sanitization_tests = (
+        [undef, undef,
+         [undef, undef],
+        ],
+
+        ['example.com', undef,
+         [undef, undef],
+        ],
+
+        ['example.com', 80,
+         ['example.com', 80],
+        ],
+
+        ['example.org', 81,
+         ['example.org', 81],
+        ],
+    );
+
+    for my $test (@sanitization_tests) {
+        my ($target, $port, $pair) = @$test;
+        my @result = Libravatar::URL::sanitize_target($target, $port);
+        is_deeply \@result, $pair;
+    }
+
     my @srv_tests = (
         [[
          ],
@@ -213,6 +237,6 @@ BEGIN { use_ok 'Net::DNS';
         is_deeply \@result, $pair;
     }
 
-    $test_count = @email_domain_tests + @openid_domain_tests + @lowercase_openid + @url_tests + @srv_tests + 2;
+    $test_count = @email_domain_tests + @openid_domain_tests + @lowercase_openid + @url_tests + @sanitization_tests + @srv_tests + 2;
     done_testing($test_count);
 }
