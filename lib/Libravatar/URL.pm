@@ -197,6 +197,19 @@ sub build_url {
     return $url;
 }
 
+sub sanitize_target {
+    my ( $target, $port ) = @_;
+
+    unless ( $target =~ m/^[0-9a-zA-Z\-.]+$/ ) {
+        return ( undef, undef );
+    }
+    unless ( $port =~ m/^[0-9]{1,5}$/ ) {
+        return ( undef, undef );
+    }
+
+    return ( $target, $port )
+}
+
 sub federated_url {
     my %args = @_;
 
@@ -215,7 +228,7 @@ sub federated_url {
     my $packet = $fast_resolver->query($srv_prefix . '._tcp.' . $domain, 'SRV');
 
     if ( $packet and $packet->answer ) {
-        my ( $target, $port ) = srv_hostname($packet->answer);
+        my ( $target, $port ) = sanitize_target(srv_hostname($packet->answer));
         return build_url($target, $port, $args{https});
     }
     return undef;
