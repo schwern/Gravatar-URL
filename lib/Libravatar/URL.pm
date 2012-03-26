@@ -200,10 +200,10 @@ sub build_url {
 sub sanitize_target {
     my ( $target, $port ) = @_;
 
-    unless ( $target =~ m/^[0-9a-zA-Z\-.]+$/ ) {
+    unless ( defined $target && $target =~ m/^[0-9a-zA-Z\-.]+$/ ) {
         return ( undef, undef );
     }
-    unless ( $port =~ m/^[0-9]{1,5}$/ ) {
+    unless ( defined $port && $port =~ m/^[0-9]{1,5}$/ ) {
         return ( undef, undef );
     }
 
