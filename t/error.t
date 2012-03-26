@@ -39,8 +39,9 @@ for my $test (@tests) {
     eval { gravatar_url( %$args ) };
 
     my $error = $@;
+    $error =~ s/\.\n/\n/;
     $want  = !$want ? ""
-                    : sprintf "%s at %s line %d\n", $want, $0, __LINE__ - 4;
+                    : sprintf "%s at %s line %d\n", $want, $0, __LINE__ - 5;
 
     my $name = join ", ", map { "$_ => '$args->{$_}'" } keys %$args;
     is $error, $want, "gravatar_url($name)";
