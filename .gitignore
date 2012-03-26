@@ -10,5 +10,5 @@ cover_db/
 nytprof*
 *.patch
 .DS_Store
-MYMETA.yml
+MYMETA.*
 *.o
