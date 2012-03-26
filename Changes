@@ -1,3 +1,10 @@
+1.06
+    Bug fixes
+    * Fixed some undef warnings during sanitization.
+
+    Test fixes
+    * Adapt to changes in Carp 1.25 [rt.cpan.org 75523]
+
 1.05  Wed Jul  6 22:40:06 NZST 2011
     Security fix
     * Sanitize DNS results in Libravatar::URL
