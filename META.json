@@ -1,0 +1,70 @@
+{
+   "abstract" : "Make URLs for Gravatars from an email address",
+   "author" : [
+      "unknown"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112621",
+   "keywords" : [
+      "Gravatar"
+   ],
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Gravatar-URL",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::More" : "0.4",
+            "Test::Warn" : "0.11"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.2808"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : 0,
+            "Digest::MD5" : 0,
+            "Digest::SHA" : 0,
+            "Net::DNS::Resolver" : 0,
+            "URI::Escape" : 0,
+            "parent" : 0,
+            "perl" : "v5.6.0"
+         }
+      }
+   },
+   "provides" : {
+      "Gravatar::URL" : {
+         "file" : "lib/Gravatar/URL.pm",
+         "version" : "1.06"
+      },
+      "Libravatar::URL" : {
+         "file" : "lib/Libravatar/URL.pm",
+         "version" : "1.06"
+      },
+      "Unicornify::URL" : {
+         "file" : "lib/Unicornify/URL.pm",
+         "version" : "1.06"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=Gravatar-URL"
+      },
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ],
+      "repository" : {
+         "url" : "http://github.com/schwern/gravatar-url/tree/master"
+      }
+   },
+   "version" : "1.06"
+}

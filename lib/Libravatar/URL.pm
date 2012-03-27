@@ -7,7 +7,7 @@ use Gravatar::URL qw(gravatar_url);
 use Digest::SHA qw(sha256_hex);
 use Carp;
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
 
 use parent 'Exporter';
 our @EXPORT = qw(

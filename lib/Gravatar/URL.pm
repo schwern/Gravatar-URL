@@ -7,7 +7,7 @@ use URI::Escape qw(uri_escape);
 use Digest::MD5 qw(md5_hex);
 use Carp;
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
 
 use parent 'Exporter';
 our @EXPORT = qw(

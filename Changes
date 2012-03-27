@@ -1,4 +1,4 @@
-1.06
+1.06  Tue Mar 27 12:55:30 BST 2012
     Bug fixes
     * Fixed some undef warnings during sanitization.
 
