@@ -30,7 +30,7 @@ my $builder = Module::Build->new(
     },
 
     requires             => {
-        'Net::DNS::Resolver' => 0,
+        'Net::DNS'           => 1.01,
         'URI::Escape'        => 0,
         'Digest::MD5'        => 0,
         'Digest::SHA'        => 0,
