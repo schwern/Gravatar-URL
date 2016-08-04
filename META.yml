@@ -3,39 +3,40 @@ abstract: 'Make URLs for Gravatars from an email address'
 author:
   - unknown
 build_requires:
-  Test::More: 0.4
-  Test::Warn: 0.11
+  Test::More: '0.4'
+  Test::Warn: '0.11'
 configure_requires:
-  Module::Build: 0.2808
+  Module::Build: '0.42'
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112621'
+generated_by: 'Module::Build version 0.4218, CPAN::Meta::Converter version 2.150005'
 keywords:
   - Gravatar
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: Gravatar-URL
 provides:
   Gravatar::URL:
     file: lib/Gravatar/URL.pm
-    version: 1.06
+    version: '1.06'
   Libravatar::URL:
     file: lib/Libravatar/URL.pm
-    version: 1.06
+    version: '1.06'
   Unicornify::URL:
     file: lib/Unicornify/URL.pm
-    version: 1.06
+    version: '1.06'
 requires:
-  Carp: 0
-  Digest::MD5: 0
-  Digest::SHA: 0
-  Net::DNS::Resolver: 0
-  URI::Escape: 0
-  parent: 0
+  Carp: '0'
+  Digest::MD5: '0'
+  Digest::SHA: '0'
+  Net::DNS::Resolver: '0'
+  URI::Escape: '0'
+  parent: '0'
   perl: v5.6.0
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Gravatar-URL
   license: http://dev.perl.org/licenses/
   repository: http://github.com/schwern/gravatar-url/tree/master
-version: 1.06
+version: '1.06'
+x_serialization_backend: 'CPAN::Meta::YAML version 0.012'

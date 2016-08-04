@@ -4,7 +4,7 @@
       "unknown"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112621",
+   "generated_by" : "Module::Build version 0.4218",
    "keywords" : [
       "Gravatar"
    ],
@@ -25,17 +25,17 @@
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.2808"
+            "Module::Build" : "0.42"
          }
       },
       "runtime" : {
          "requires" : {
-            "Carp" : 0,
-            "Digest::MD5" : 0,
-            "Digest::SHA" : 0,
-            "Net::DNS::Resolver" : 0,
-            "URI::Escape" : 0,
-            "parent" : 0,
+            "Carp" : "0",
+            "Digest::MD5" : "0",
+            "Digest::SHA" : "0",
+            "Net::DNS::Resolver" : "0",
+            "URI::Escape" : "0",
+            "parent" : "0",
             "perl" : "v5.6.0"
          }
       }
@@ -66,5 +66,6 @@
          "url" : "http://github.com/schwern/gravatar-url/tree/master"
       }
    },
-   "version" : "1.06"
+   "version" : "1.06",
+   "x_serialization_backend" : "JSON::PP version 2.27203"
 }
