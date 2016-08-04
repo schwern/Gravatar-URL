@@ -1,3 +1,4 @@
+.travis.yml
 Build.PL
 Changes
 lib/Gravatar/URL.pm
@@ -7,6 +8,7 @@ MANIFEST			This list of files
 MANIFEST.SKIP
 META.json
 META.yml
+README
 t/deprecated.t
 t/error.t
 t/id.t
