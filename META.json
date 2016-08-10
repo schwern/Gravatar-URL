@@ -4,7 +4,7 @@
       "unknown"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4218",
+   "generated_by" : "Module::Build version 0.4216",
    "keywords" : [
       "Gravatar"
    ],
@@ -19,6 +19,7 @@
    "prereqs" : {
       "build" : {
          "requires" : {
+            "Test::MockRandom" : "1.01",
             "Test::More" : "0.4",
             "Test::Warn" : "0.11"
          }
@@ -33,7 +34,7 @@
             "Carp" : "0",
             "Digest::MD5" : "0",
             "Digest::SHA" : "0",
-            "Net::DNS::Resolver" : "0",
+            "Net::DNS" : "1.01",
             "URI::Escape" : "0",
             "parent" : "0",
             "perl" : "v5.6.0"
@@ -67,5 +68,5 @@
       }
    },
    "version" : "1.06",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "x_serialization_backend" : "JSON::PP version 2.27300"
 }

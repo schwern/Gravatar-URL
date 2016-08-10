@@ -3,12 +3,13 @@ abstract: 'Make URLs for Gravatars from an email address'
 author:
   - unknown
 build_requires:
+  Test::MockRandom: '1.01'
   Test::More: '0.4'
   Test::Warn: '0.11'
 configure_requires:
   Module::Build: '0.42'
 dynamic_config: 1
-generated_by: 'Module::Build version 0.4218, CPAN::Meta::Converter version 2.150005'
+generated_by: 'Module::Build version 0.4216, CPAN::Meta::Converter version 2.150005'
 keywords:
   - Gravatar
 license: perl
@@ -30,7 +31,7 @@ requires:
   Carp: '0'
   Digest::MD5: '0'
   Digest::SHA: '0'
-  Net::DNS::Resolver: '0'
+  Net::DNS: '1.01'
   URI::Escape: '0'
   parent: '0'
   perl: v5.6.0
