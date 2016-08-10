@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 
 use Test::More;
+use Test::MockRandom 'Libravatar::URL';
 
 BEGIN { use_ok 'Net::DNS';
         use_ok 'Libravatar::URL'; }
@@ -222,7 +223,7 @@ BEGIN { use_ok 'Net::DNS';
         ],
     );
 
-    srand(42); # to make these tests predictable
+    srand(0.74,0,0.1,0.42); # to make these tests predictable
 
     for my $test (@srv_tests) {
         my ($srv_strings, $pair) = @$test;
@@ -234,6 +235,7 @@ BEGIN { use_ok 'Net::DNS';
         }
 
         my @result = Libravatar::URL::srv_hostname(@srv_records);
+
         is_deeply \@result, $pair;
     }
 
