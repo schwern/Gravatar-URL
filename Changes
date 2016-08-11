@@ -1,3 +1,19 @@
+1.07  Wed Aug 10 17:47:19 PDT 2016
+    Bug Fixes
+    * Require an updated version of Net::DNS to avoid
+      "resolver->dnssec(1) without Net::DNS::SEC installed"
+      (Schwern) [github #4]
+
+    Test Fixes
+    * Fix our fake random number generator to avoid cross platform issues.
+      [rt.cpan.org 71064] [github #7] (Lisa Hare)
+
+    Distribution
+    * Kwalitee fixups (BooK) (Lisa Hare)
+    * Added a LICENSE file (Lisa Hare)
+    * Now using Travis CI for Unix testing (Schwern)
+    * Now using AppVeyor for Windows testing (Schwern)
+
 1.06  Tue Mar 27 12:55:30 BST 2012
     Bug fixes
     * Fixed some undef warnings during sanitization.
