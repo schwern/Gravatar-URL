@@ -3,6 +3,7 @@ abstract: 'Make URLs for Gravatars from an email address'
 author:
   - 'Michael G. Schwern <schwern@pobox.com>'
 build_requires:
+  Test::MockRandom: '1.01'
   Test::More: '0.4'
   Test::Warn: '0.11'
 configure_requires:

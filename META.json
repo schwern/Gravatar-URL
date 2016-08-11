@@ -19,6 +19,7 @@
    "prereqs" : {
       "build" : {
          "requires" : {
+            "Test::MockRandom" : "1.01",
             "Test::More" : "0.4",
             "Test::Warn" : "0.11"
          }

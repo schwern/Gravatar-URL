@@ -26,7 +26,8 @@ my $builder = Module::Build->new(
 
     build_requires      => {
         'Test::More'        => 0.40,
-        'Test::Warn'        => 0.11
+        'Test::Warn'        => 0.11,
+        'Test::MockRandom'  => 1.01,
     },
 
     requires             => {
