@@ -26,7 +26,7 @@ my $builder = Module::Build->new(
 
     build_requires      => {
         'Test::More'        => 0.40,
-        'Test::Warn'        => 0.11,
+        'Test::Warn'        => 0.11
     },
 
     requires             => {
@@ -38,6 +38,10 @@ my $builder = Module::Build->new(
         perl                 => '5.6.0',
         'parent'             => 0,
     },
+    dist_version_from => 'lib/Gravatar/URL.pm',
+    create_readme => 1,
+    create_license => 1,
+    dist_author => 'Michael G. Schwern <schwern@pobox.com>'
 );
 
 $builder->create_build_script();

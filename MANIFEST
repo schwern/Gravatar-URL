@@ -15,3 +15,4 @@ t/id.t
 t/libravatar.t
 t/unicornify.t
 t/url.t
+LICENSE

@@ -1,10 +1,10 @@
 {
    "abstract" : "Make URLs for Gravatars from an email address",
    "author" : [
-      "unknown"
+      "Michael G. Schwern <schwern@pobox.com>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4218",
+   "generated_by" : "Module::Build version 0.4216",
    "keywords" : [
       "Gravatar"
    ],
@@ -33,7 +33,7 @@
             "Carp" : "0",
             "Digest::MD5" : "0",
             "Digest::SHA" : "0",
-            "Net::DNS::Resolver" : "0",
+            "Net::DNS" : "1.01",
             "URI::Escape" : "0",
             "parent" : "0",
             "perl" : "v5.6.0"
@@ -67,5 +67,5 @@
       }
    },
    "version" : "1.06",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "x_serialization_backend" : "JSON::PP version 2.27300"
 }
