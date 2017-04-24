@@ -44,5 +44,5 @@ for my $test (@tests) {
                     : sprintf "%s at %s line %d\n", $want, $0, __LINE__ - 5;
 
     my $name = join ", ", map { "$_ => '$args->{$_}'" } keys %$args;
-    is $error, $want, "gravatar_url($name)";
+    like $error, qr/\A\Q$want\E\.?\z/, "gravatar_url($name)";
 }
